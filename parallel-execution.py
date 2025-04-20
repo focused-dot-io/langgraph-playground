@@ -1,4 +1,6 @@
 import operator
+from time import sleep
+import time
 from typing import Annotated, Any
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, START, END
@@ -11,11 +13,13 @@ class State(TypedDict):
 
 def search_web(state: State):
     print(f'Searching the web...')
+    sleep(1)
     return {"web_results": ["results"]}
 
 
 def search_vector_db(state: State):
     print(f'Searching the vector database...')
+    sleep(1)
     return {"vector_results": ["results"]}
 
 def aggregate_results(state: State):
@@ -39,7 +43,10 @@ linear_graph = linear_graph.compile()
 linear_graph.get_graph().draw_mermaid_png(output_file_path="linear_graph.png")
 
 
+time_start = time.time()
 linear_graph.invoke({"aggregate": []})
+time_end = time.time()
+print(f"Linear graph execution time: {time_end - time_start} seconds")
 
 ########################################################
 # Here we are using the same nodes for the parallel graph
@@ -57,4 +64,7 @@ parallel_graph = parallel_graph.compile()
 
 parallel_graph.get_graph().draw_mermaid_png(output_file_path="parallel_graph.png")
 
+time_start = time.time()
 parallel_graph.invoke({"aggregate": []})
+time_end = time.time()
+print(f"Parallel graph execution time: {time_end - time_start} seconds")
