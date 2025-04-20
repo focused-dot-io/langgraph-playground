@@ -1,0 +1,12 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+We are building example code for langchain and langgraph. Some specifics to remember:
+
+- Each file is an independently runnable script that demonstrates a function of LangChain and LangGraph
+- Use uv to run scripts
+- Code should be explicit and not too clever
+- Always use the latest LangChain and LangGraph, check their documentation regurally
+- Prefer LangGraph over raw LangChain
